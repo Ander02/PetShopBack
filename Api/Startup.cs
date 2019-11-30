@@ -1,3 +1,5 @@
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,8 @@ using Nudes.SeedMaster;
 using Nudes.SeedMaster.Interfaces;
 using Nudes.SeedMaster.Seeder;
 using PetShop.Data;
+using PetShop.Infrastructure.Behaviors;
+using PetShop.Infrastructure.Notifications;
 using PetShop.Infrastructure.Swagger;
 using System.Reflection;
 
@@ -55,11 +59,30 @@ namespace PetShop
 
             #region MVC
 
-            services.AddControllers().AddJsonOptions(config =>
+            services.AddControllers(config =>
+            {
+                
+                config.Filters.Add(typeof(NotificationFilter));
+
+            }).AddJsonOptions(config =>
             {
                 config.JsonSerializerOptions.IgnoreNullValues = true;
                 config.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
             });
+
+            #endregion
+
+            #region Infrastructure
+
+            services.AddScoped<NotificationContext>();
+
+            services.AddMediatR(apiAssembly);
+
+            AssemblyScanner.FindValidatorsInAssembly(apiAssembly)
+                .ForEach(validator => services.AddScoped(validator.InterfaceType, validator.ValidatorType));
+
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(NotificationValidationBehavior<,>));
+
 
             #endregion
 

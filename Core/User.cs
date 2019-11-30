@@ -23,7 +23,7 @@ namespace Core
         public virtual IList<Pet> Pets { get; set; }
         public virtual IList<Adoption> Adoptions { get; set; }
 
-        public DateTimeOffset DeletedAt { get; set; }
+        public DateTimeOffset? DeletedAt { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public DateTimeOffset ModifiedAt { get; set; }
 

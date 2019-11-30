@@ -13,7 +13,7 @@ namespace Core
         public Guid OwnerId { get; set; }
         public virtual User Owner { get; set; }
 
-        public DateTimeOffset DeletedAt { get; set; }
+        public DateTimeOffset? DeletedAt { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public DateTimeOffset ModifiedAt { get; set; }
     }

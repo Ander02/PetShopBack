@@ -67,6 +67,7 @@ namespace PetShop.Features.Users
                 {
                     Name = request.Name,
                     Email = request.Email,
+                    LegalDocument = request.LegalDocument,
                     PersonType = request.PersonType,
                     PhoneNumber = request.PhoneNumber,
                 };
@@ -74,7 +75,6 @@ namespace PetShop.Features.Users
                 user.SetPassword(request.Password);
 
                 db.Users.Add(user);
-
                 await db.SaveChangesAsync(cancellationToken);
 
                 return new Result

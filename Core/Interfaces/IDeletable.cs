@@ -4,6 +4,6 @@ namespace Core.Interfaces
 {
     public interface IDeletable
     {
-        public DateTimeOffset DeletedAt { get; set; }
+        public DateTimeOffset? DeletedAt { get; set; }
     }
 }

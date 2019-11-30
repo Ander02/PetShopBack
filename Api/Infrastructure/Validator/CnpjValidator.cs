@@ -1,9 +1,7 @@
-﻿using FluentValidation.Validators;
-using PetShop.Infrastructure.Extensions;
+﻿using Core.Extensions;
+using FluentValidation.Validators;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PetShop.Infrastructure.Validator
 {

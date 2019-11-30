@@ -13,8 +13,8 @@ namespace PetShop.Data
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Adoption> Adoptions { get; set; }
 
-        public ApiDbContext() : base() { }
-        
+        public ApiDbContext(DbContextOptions options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<User>(_user =>

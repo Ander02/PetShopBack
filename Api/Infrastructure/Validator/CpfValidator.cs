@@ -1,5 +1,5 @@
-﻿using FluentValidation.Validators;
-using PetShop.Infrastructure.Extensions;
+﻿using Core.Extensions;
+using FluentValidation.Validators;
 using System;
 using System.Linq;
 
