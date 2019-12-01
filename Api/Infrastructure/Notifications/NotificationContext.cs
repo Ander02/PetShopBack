@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PetShop.Infrastructure.Notifications
+namespace Api.Infrastructure.Notifications
 {
     public class NotificationContext
     {

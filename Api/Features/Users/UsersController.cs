@@ -1,10 +1,11 @@
 ﻿using Api.Features.Users;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PetShop.Features.Users
+namespace Api.Features.Users
 {
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
@@ -21,6 +22,7 @@ namespace PetShop.Features.Users
             => Ok(await mediator.Send(request));
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserResult>>> List([FromBody] List.Query request)
             => Ok(await mediator.Send(request));
 

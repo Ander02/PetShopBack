@@ -1,22 +1,26 @@
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Nudes.SeedMaster;
 using Nudes.SeedMaster.Interfaces;
 using Nudes.SeedMaster.Seeder;
-using PetShop.Data;
-using PetShop.Infrastructure.Behaviors;
-using PetShop.Infrastructure.Notifications;
-using PetShop.Infrastructure.Swagger;
+using Api.Data;
+using Api.Infrastructure.Behaviors;
+using Api.Infrastructure.Notifications;
+using Api.Infrastructure.Swagger;
+using System;
 using System.Reflection;
+using System.Text;
 
-namespace PetShop
+namespace Api
 {
     public class Startup
     {
@@ -61,7 +65,7 @@ namespace PetShop
 
             services.AddControllers(config =>
             {
-                
+
                 config.Filters.Add(typeof(NotificationFilter));
 
             }).AddJsonOptions(config =>
@@ -72,17 +76,45 @@ namespace PetShop
 
             #endregion
 
+            #region Authorization
+
+            services.AddAuthentication((options) =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Key"])),
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Auth:Audience"],
+
+                    ValidateIssuer = true,
+                    ValidIssuer = Configuration["Auth:Issuer"],
+
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+            #endregion
+
             #region Infrastructure
 
             services.AddScoped<NotificationContext>();
 
             services.AddMediatR(apiAssembly);
 
+            services.AddTransient(_ => Configuration);
+
             AssemblyScanner.FindValidatorsInAssembly(apiAssembly)
                 .ForEach(validator => services.AddScoped(validator.InterfaceType, validator.ValidatorType));
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(NotificationValidationBehavior<,>));
-
 
             #endregion
 
@@ -135,6 +167,7 @@ namespace PetShop
 
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(options => options.MapControllers());
         }
     }

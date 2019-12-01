@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using PetShop.Infrastructure.Notifications;
+using Api.Infrastructure.Notifications;
 using System.Linq;
 
 namespace Test.Extensions

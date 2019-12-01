@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace PetShop.Data
+namespace Api.Data
 {
     public class ApiDbContext : DbContext
     {

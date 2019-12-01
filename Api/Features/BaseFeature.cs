@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PetShop.Features.Users
+namespace Api.Features.Users
 {
     public class BaseFeature
     {

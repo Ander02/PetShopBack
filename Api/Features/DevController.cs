@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetShop.Features
+namespace Api.Features
 {
     [Route("api/[controller]")]
     public class DevController : ControllerBase

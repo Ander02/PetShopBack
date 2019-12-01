@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using PetShop;
-using PetShop.Infrastructure.Validator;
+using Api;
+using Api.Infrastructure.Validator;
 using Xunit;
 
 namespace Test.Unit.Features.Validators

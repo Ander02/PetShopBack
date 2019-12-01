@@ -3,7 +3,7 @@ using FluentValidation.Validators;
 using System;
 using System.Linq;
 
-namespace PetShop.Infrastructure.Validator
+namespace Api.Infrastructure.Validator
 {
     public class CnpjValidator : PropertyValidator
     {

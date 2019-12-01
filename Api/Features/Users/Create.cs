@@ -3,12 +3,12 @@ using Core;
 using Core.Enums;
 using FluentValidation;
 using MediatR;
-using PetShop.Data;
-using PetShop.Infrastructure.Validator;
+using Api.Data;
+using Api.Infrastructure.Validator;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PetShop.Features.Users
+namespace Api.Features.Users
 {
     public class Create
     {

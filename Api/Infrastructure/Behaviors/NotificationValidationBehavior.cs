@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 using MediatR;
-using PetShop.Infrastructure.Notifications;
+using Api.Infrastructure.Notifications;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PetShop.Infrastructure.Behaviors
+namespace Api.Infrastructure.Behaviors
 {
     public class NotificationValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

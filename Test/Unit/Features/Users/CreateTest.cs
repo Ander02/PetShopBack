@@ -1,8 +1,8 @@
 ﻿using Core.Enums;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using PetShop;
-using PetShop.Features.Users;
+using Api;
+using Api.Features.Users;
 using System.Threading.Tasks;
 using Test.Extensions;
 using Xunit;

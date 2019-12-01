@@ -1,4 +1,4 @@
-﻿namespace PetShop.Infrastructure.Notifications
+﻿namespace Api.Infrastructure.Notifications
 {
     public class Notification
     {

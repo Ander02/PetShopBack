@@ -1,6 +1,6 @@
 ﻿using Api.Features.Users;
 using FluentAssertions;
-using PetShop;
+using Api;
 using System;
 using System.Threading.Tasks;
 using Xunit;

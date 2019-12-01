@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
 
-namespace PetShop.Infrastructure.Swagger
+namespace Api.Infrastructure.Swagger
 {
     public class LowercaseDocumentFilter : IDocumentFilter
     {

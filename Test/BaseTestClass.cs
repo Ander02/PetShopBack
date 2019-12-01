@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PetShop;
-using PetShop.Data;
-using PetShop.Infrastructure.Notifications;
+using Api;
+using Api.Data;
+using Api.Infrastructure.Notifications;
 using Xunit;
 
 namespace Test

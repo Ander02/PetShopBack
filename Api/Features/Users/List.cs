@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PetShop.Data;
+using Api.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

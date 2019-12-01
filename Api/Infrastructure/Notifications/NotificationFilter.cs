@@ -8,7 +8,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace PetShop.Infrastructure.Notifications
+namespace Api.Infrastructure.Notifications
 {
     public class NotificationFilter : IAsyncResultFilter
     {

@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetShop
+namespace Api
 {
     public class Program
     {
