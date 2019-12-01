@@ -17,7 +17,7 @@ namespace Test.Unit.Features.Users
             var result = await mediator.Send(new List.Query { });
 
             result.Should().NotBeNull();
-            result.Should().HaveCount(1);
+            result.Should().HaveCount(2);
         }
 
         [Fact]

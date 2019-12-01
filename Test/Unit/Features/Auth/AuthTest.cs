@@ -28,8 +28,8 @@ namespace Test.Unit.Features.Auth
         {
             var result = await mediator.Send(new Api.Features.Auth.Auth.Command
             {
-                Email = "email@email.com",
-                Password = "senha1234"
+                Email = "admin@email.com",
+                Password = "senha"
             });
 
             notificationContext.EnsureHasNotifications();
@@ -41,7 +41,7 @@ namespace Test.Unit.Features.Auth
         {
             var result = await mediator.Send(new Api.Features.Auth.Auth.Command
             {
-                Email = "email@email.com",
+                Email = "admin@email.com",
                 Password = "senha123"
             });
 
