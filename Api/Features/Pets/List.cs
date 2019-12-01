@@ -15,7 +15,7 @@ namespace Api.Features.Pets
         public class Query : IRequest<IEnumerable<Result>>
         {
             public string Search { get; set; }
-            public Guid OwnerId { get; set; }
+            public Guid? OwnerId { get; set; }
         }
 
         public class Result
@@ -45,9 +45,10 @@ namespace Api.Features.Pets
 
             public async Task<IEnumerable<Result>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var query = db.Pets.Include(d => d.Owner)
-                                   .Where(d => d.OwnerId == request.OwnerId)
-                                   .AsNoTracking();
+                var query = db.Pets.Include(d => d.Owner).AsNoTracking();
+
+                if (request.OwnerId.HasValue)
+                    query = query.Where(d => d.OwnerId == request.OwnerId);
 
                 if (!string.IsNullOrWhiteSpace(request.Search))
                     query = query.Where(d => d.Name.Contains(request.Search)

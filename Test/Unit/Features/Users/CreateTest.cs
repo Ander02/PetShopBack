@@ -23,7 +23,6 @@ namespace Test.Unit.Features.Users
 
             notificationContext.EnsureHasNotifications();
             result.Should().BeNull();
-
         }
 
         [Fact]
