@@ -1,10 +1,10 @@
-﻿using Core;
+﻿using Api.Features.Users;
+using Core;
 using Core.Enums;
 using FluentValidation;
 using MediatR;
 using PetShop.Data;
 using PetShop.Infrastructure.Validator;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace PetShop.Features.Users
 {
     public class Create
     {
-        public class Command : IRequest<Result>
+        public class Command : IRequest<UserResult>
         {
             public string Name { get; set; }
             public string Email { get; set; }
@@ -42,17 +42,7 @@ namespace PetShop.Features.Users
             }
         }
 
-        public class Result
-        {
-            public Guid Id { get; set; }
-            public string Name { get; set; }
-            public string Email { get; set; }
-            public PersonType PersonType { get; set; }
-            public string LegalDocument { get; set; }
-            public string PhoneNumber { get; set; }
-        }
-
-        public class Handler : IRequestHandler<Command, Result>
+        public class Handler : IRequestHandler<Command, UserResult>
         {
             private readonly ApiDbContext db;
 
@@ -61,7 +51,7 @@ namespace PetShop.Features.Users
                 this.db = db;
             }
 
-            public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<UserResult> Handle(Command request, CancellationToken cancellationToken)
             {
                 var user = new User
                 {
@@ -77,7 +67,7 @@ namespace PetShop.Features.Users
                 db.Users.Add(user);
                 await db.SaveChangesAsync(cancellationToken);
 
-                return new Result
+                return new UserResult
                 {
                     Id = user.Id,
                     Email = user.Email,
