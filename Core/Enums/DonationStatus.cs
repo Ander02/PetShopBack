@@ -5,6 +5,7 @@
         HasInterest,
         InProgress,
         InStop,
-        Finalized
+        Finalized,
+        Canceled
     }
 }
