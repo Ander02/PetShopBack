@@ -15,7 +15,10 @@ namespace Api.Features.Users
 
         public class Validator : AbstractValidator<Command>
         {
+            public Validator()
+            {
 
+            }
         }
 
         public class Result
