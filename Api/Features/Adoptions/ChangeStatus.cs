@@ -46,7 +46,7 @@ namespace Api.Features.Adoptions
 
             public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
             {
-                var adoption = await db.Adoptions.FirstOrDefaultAsync(d => d.Status == request.Status, cancellationToken);
+                var adoption = await db.Adoptions.FirstOrDefaultAsync(d => d.Id == request.Id, cancellationToken);
 
                 if (adoption == null)
                 {

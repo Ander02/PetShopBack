@@ -1,3 +1,7 @@
+using Api.Data;
+using Api.Infrastructure.Behaviors;
+using Api.Infrastructure.Notifications;
+using Api.Infrastructure.Swagger;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,10 +16,6 @@ using Microsoft.OpenApi.Models;
 using Nudes.SeedMaster;
 using Nudes.SeedMaster.Interfaces;
 using Nudes.SeedMaster.Seeder;
-using Api.Data;
-using Api.Infrastructure.Behaviors;
-using Api.Infrastructure.Notifications;
-using Api.Infrastructure.Swagger;
 using System;
 using System.Reflection;
 using System.Text;
@@ -49,7 +49,7 @@ namespace Api
             services.AddDbContext<ApiDbContext>(options => options
                 .EnableDetailedErrors(Environment.IsDevelopment())
                 .EnableSensitiveDataLogging(Environment.IsDevelopment())
-                .UseSqlServer(Configuration.GetConnectionString("Default")));
+                .UseInMemoryDatabase("PetShopDB"));
 
             //Seeder
             services.AddScoped<DbContext>(provider => provider.GetService<ApiDbContext>());

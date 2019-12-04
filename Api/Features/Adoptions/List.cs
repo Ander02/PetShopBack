@@ -58,25 +58,28 @@ namespace Api.Features.Adoptions
 
             public async Task<IEnumerable<Result>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await db.Adoptions.Include(d => d.Pet)
-                                         .Include(d => d.Adopter)
-                                         .Where(d => request.Status.HasValue && d.Status == request.Status)
-                                         .AsNoTracking()
-                                         .Select(d => new Result
-                                         {
-                                             Id = d.Id,
-                                             Pet = d.Pet == null ? null : new Result.PetResult
-                                             {
-                                                 Id = d.Pet.Id,
-                                                 Name = d.Pet.Name,
-                                                 Breed = d.Pet.Breed,
-                                             },
-                                             User = d.Adopter == null ? null : new Result.UserResult
-                                             {
-                                                 Id = d.Adopter.Id,
-                                                 Name = d.Adopter.Name
-                                             }
-                                         }).ToListAsync(cancellationToken);
+                var query = db.Adoptions.Include(d => d.Pet)
+                                        .Include(d => d.Adopter)
+                                        .AsNoTracking();
+
+                if (request.Status.HasValue)
+                    query = query.Where(d => d.Status == request.Status);
+
+                return await query.Select(d => new Result
+                {
+                    Id = d.Id,
+                    Pet = d.Pet == null ? null : new Result.PetResult
+                    {
+                        Id = d.Pet.Id,
+                        Name = d.Pet.Name,
+                        Breed = d.Pet.Breed,
+                    },
+                    User = d.Adopter == null ? null : new Result.UserResult
+                    {
+                        Id = d.Adopter.Id,
+                        Name = d.Adopter.Name
+                    }
+                }).ToListAsync(cancellationToken);
             }
         }
     }

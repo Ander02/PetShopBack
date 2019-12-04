@@ -1,5 +1,4 @@
 ﻿using Api.Features.Users;
-using Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +32,7 @@ namespace Api.Features.Pets
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<UserResult>>> List([FromBody] List.Query request)
+        public async Task<ActionResult<IEnumerable<UserResult>>> List([FromQuery] List.Query request)
             => Ok(await mediator.Send(request));
 
     }

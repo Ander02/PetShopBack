@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Api.Features.Adoptions
 {
+    [Route("api/[controller]")]
     public class AdoptionsController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -23,7 +24,7 @@ namespace Api.Features.Adoptions
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<List.Result>>> List([FromBody] List.Query request)
+        public async Task<ActionResult<IEnumerable<List.Result>>> List([FromQuery] List.Query request)
             => Ok(await mediator.Send(request));
     }
 }

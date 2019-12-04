@@ -1,5 +1,4 @@
-﻿using Api.Features.Users;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Api.Features.Users
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<UserResult>>> List([FromBody] List.Query request)
+        public async Task<ActionResult<IEnumerable<UserResult>>> List([FromQuery] List.Query request)
             => Ok(await mediator.Send(request));
 
     }
